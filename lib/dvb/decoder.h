@@ -85,7 +85,7 @@ public:
 	virtual ~eDVBTText();
 };
 
-class eTSMPEGDecoder: public Object, public iTSMPEGDecoder
+class eTSMPEGDecoder: public sigc::trackable, public
 {
 	DECLARE_REF(eTSMPEGDecoder);
 private:
