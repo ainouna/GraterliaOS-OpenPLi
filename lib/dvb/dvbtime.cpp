@@ -501,7 +501,7 @@ void eDVBLocalTimeHandler::DVBChannelAdded(eDVBChannel *chan)
 		tmp.first->second.tdt = NULL;
 		tmp.first->second.channel = chan;
 		tmp.first->second.m_prevChannelState = -1;
-		chan->connectStateChange(slot(*this, &eDVBLocalTimeHandler::DVBChannelStateChanged), tmp.first->second.m_stateChangedConn);
+		chan->connectStateChange(sigc::mem_fun(*this, &eDVBLocalTimeHandler::DVBChannelStateChanged), tmp.first->second.m_stateChangedConn);
 	}
 }
 
