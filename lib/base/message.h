@@ -96,8 +96,8 @@ class eFixedMessagePump: public sigc::trackable, FD
 			eFatal("[eFixedMessagePump] write error %m");
 	}
 public:
-	Signal1<void,const T&> recv_msg;
-	void send(const T &msg)
+        sigc::signal1<void,const T&> recv_msg;
+        void send(const T &msg)
 	{
 		{
 			eSingleLocker s(lock);
@@ -120,7 +120,7 @@ public:
 };
 #endif
 
-class ePythonMessagePump: public eMessagePumpMT, public Object
+class ePythonMessagePump: public eMessagePumpMT, public sigc::trackable
 {
 	ePtr<eSocketNotifier> sn;
 	void do_recv(int)
