@@ -26,7 +26,7 @@ public:
 	virtual ~eDVBAudio();
 };
 
-class eDVBVideo: public iObject, public Object
+class eDVBVideo: public iObject, public sigc::trackable
 {
 	DECLARE_REF(eDVBVideo);
 private:
@@ -36,7 +36,7 @@ private:
 	int m_is_slow_motion, m_is_fast_forward, m_is_freezed;
 	ePtr<eSocketNotifier> m_sn;
 	void video_event(int what);
-	Signal1<void, struct iTSMPEGDecoder::videoEvent> m_event;
+	sigc::signal1<void, struct iTSMPEGDecoder::vid
 	int m_width, m_height, m_framerate, m_aspect, m_progressive;
 	static int readApiSize(int fd, int &xres, int &yres, int &aspect);
 public:
@@ -51,7 +51,7 @@ public:
 	void unfreeze();
 	int getPTS(pts_t &now);
 	virtual ~eDVBVideo();
-	RESULT connectEvent(const Slot1<void, struct iTSMPEGDecoder::videoEvent> &event, ePtr<eConnection> &conn);
+	RESULT connectEvent(const sigc::slot1<void, struct iTSMPEGDecoder::videoEvent> &event, ePtr<eConnection> &conn);
 	int getWidth();
 	int getHeight();
 	int getProgressive();
