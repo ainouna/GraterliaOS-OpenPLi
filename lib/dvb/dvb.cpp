@@ -1597,7 +1597,7 @@ eDVBChannel::eDVBChannel(eDVBResourceManager *mgr, eDVBAllocatedFrontend *fronte
 	m_skipmode_n = m_skipmode_m = m_skipmode_frames = 0;
 
 	if (m_frontend)
-		m_frontend->get().connectStateChange(slot(*this, &eDVBChannel::frontendStateChanged), m_conn_frontendStateChanged);
+		m_frontend->get().connectStateChange(sigc::mem_fun(*this, &eDVBChannel::frontendStateChanged), m_conn_frontendStateChanged);
 }
 
 eDVBChannel::~eDVBChannel()
